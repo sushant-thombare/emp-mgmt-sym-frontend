@@ -81,8 +81,8 @@ class CreateEmployeeComponent extends Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="card col-md-6 mt-4 offset-md-3 offset-md-3">
-              <h3 className="text-center mt-3 ">{this.getTitle()}</h3>
+            <div className="card col-md-6 mt-4 p-3 bg-light offset-md-3 offset-md-3">
+              <h3 className="text-center mt-4 ">{this.getTitle()}</h3>
               <div className="card-body">
                 <form>
                   <div className="form-group">

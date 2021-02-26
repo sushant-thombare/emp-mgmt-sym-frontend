@@ -28,14 +28,18 @@ class ListEmployeeComponent extends Component {
     this.props.history.push(`/add-employee/${id}`);
   }
 
-  deleteEmployee(id) {    
-    EmployeeService.deleteEmployee(id).then(res => {
-        this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
-    })
+  deleteEmployee(id) {
+    EmployeeService.deleteEmployee(id).then((res) => {
+      this.setState({
+        employees: this.state.employees.filter(
+          (employee) => employee.id !== id
+        ),
+      });
+    });
   }
 
   viewEmployee(id) {
-      this.props.history.push(`/view-employee/${id}`)
+    this.props.history.push(`/view-employee/${id}`);
   }
 
   render() {
@@ -43,12 +47,7 @@ class ListEmployeeComponent extends Component {
       <div className="mt-4">
         <h2 className="text-center">Employees List</h2>
         <div className="row">
-          <button className="btn btn-primary" onClick={this.addEmployee}>
-            Add Employee
-          </button>
-        </div>
-        <div className="row">
-          <table className="table table-striped table-bordered">
+          <table className="table table-striped table-bordered table-hover mt-4">
             <thead>
               <tr>
                 <th>ID</th>
@@ -67,22 +66,22 @@ class ListEmployeeComponent extends Component {
                   <td>{employee.emailId}</td>
                   <td>
                     <button
-                      className="btn btn-outline-info"
+                      className="btn btn-warning"
+                      onClick={() => this.viewEmployee(employee.id)}
+                    >
+                      View
+                    </button>
+                    <button
+                      className="btn btn-info  ml-3"
                       onClick={() => this.editEmployee(employee.id)}
                     >
                       Update
                     </button>
                     <button
-                      className="btn btn-outline-danger ml-3"
+                      className="btn btn-danger ml-3"
                       onClick={() => this.deleteEmployee(employee.id)}
                     >
                       Delete
-                    </button>
-                    <button
-                      className="btn btn-outline-warning ml-3"
-                      onClick={() => this.viewEmployee(employee.id)}
-                    >
-                      View
                     </button>
                   </td>
                 </tr>
