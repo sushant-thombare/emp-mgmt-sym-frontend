@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EmployeeService from '../services/EmployeeService';
 
 class ListEmployeeComponent extends Component {
     
@@ -7,44 +8,52 @@ class ListEmployeeComponent extends Component {
         this.state = {
             employees: []
         }
+        this.addEmployee = this.addEmployee.bind(this);
+    }
+
+    componentDidMount() {
+        EmployeeService.getEmployees()
+            .then(res => {
+                this.setState({employees: res.data});
+            })
+    }
+
+    addEmployee() {
+        this.props.history.push('/add-employee');
     }
     
     render() {
         return (
-            <div>
-                
+            <div>                
                 <h2 className="text-center">Employees List</h2>
-
                 <div className="row">
-                    
-                    <table className="table table-striped table-bordered">
-                        
+                    <button className="btn btn-primary" onClick={this.addEmployee}>Add Employee</button>
+                </div>
+                <div className="row">                    
+                    <table className="table table-striped table-bordered">                        
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email ID</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-
                         <tbody>
-
                             {
                                 this.state.employees.map(employee => (
                                     <tr key = {employee.id}>
+                                        <td>{employee.id}</td>
                                         <td>{employee.firstName}</td>
                                         <td>{employee.lastName}</td>
                                         <td>{employee.emailId}</td>
                                     </tr>
                                 ))
                             }
-
                         </tbody>
                     </table>
-
                 </div>
-
             </div>
         );
     }
