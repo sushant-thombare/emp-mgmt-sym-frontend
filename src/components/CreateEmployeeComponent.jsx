@@ -115,20 +115,21 @@ class CreateEmployeeComponent extends Component {
                       onChange={this.changeEmailHandler}
                     />
                   </div>
-
-                  <button
-                    className="btn btn-success"
-                    onClick={this.saveOrUpdateEmployee}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className="btn btn-danger"
-                    onClick={this.cancel.bind(this)}
-                    style={{ marginLeft: "10px" }}
-                  >
-                    Cancel
-                  </button>
+                  <div className="text-center">
+                    <button
+                      className="btn btn-success"
+                      onClick={this.saveOrUpdateEmployee}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={this.cancel.bind(this)}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>

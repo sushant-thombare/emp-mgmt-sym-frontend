@@ -34,6 +34,10 @@ class ListEmployeeComponent extends Component {
     })
   }
 
+  viewEmployee(id) {
+      this.props.history.push(`/view-employee/${id}`)
+  }
+
   render() {
     return (
       <div className="mt-4">
@@ -73,6 +77,12 @@ class ListEmployeeComponent extends Component {
                       onClick={() => this.deleteEmployee(employee.id)}
                     >
                       Delete
+                    </button>
+                    <button
+                      className="btn btn-outline-warning ml-3"
+                      onClick={() => this.viewEmployee(employee.id)}
+                    >
+                      View
                     </button>
                   </td>
                 </tr>
