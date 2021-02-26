@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import EmployeeService from '../services/EmployeeService';
 
-class CreateEmployeeComponent extends Component {
+class UpdateEmployeeComponent extends Component {
     
     constructor(props) {
         super(props)
         
         this.state = {
-           firstName: '',
-           lastName: '',
-           emailId: ''
+            id: this.props.match.params.id,
+            firstName: '',
+            lastName: '',
+            emailId: ''
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
-        this.saveEmployee = this.saveEmployee.bind(this);
+        this.updateEmployee = this.updateEmployee.bind(this);
+    }
+
+    componentDidMount() {
+        EmployeeService.getEmployeeById(this.state.id)
+            .then(res => {
+                let employee = res.data;
+                this.setState({
+                    firstName: employee.firstName,
+                    lastName: employee.lastName,
+                    emailId: employee.emailId
+                })
+            });
     }
 
     changeFirstNameHandler = (event) => {
@@ -26,18 +39,19 @@ class CreateEmployeeComponent extends Component {
     }
 
     changeEmailHandler = (event) => {
-        this.setState({emailId: event.target.value})
+        this.setState({emailId: event.target.value});
     }
 
-    saveEmployee = (e) => {
+    updateEmployee = (e) => {
         e.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
         console.log('employee => ' + JSON.stringify(employee));
 
-        EmployeeService.createEmployee(employee)
+        EmployeeService.updateEmployee(employee, this.state.id)
             .then(res => {
                 this.props.history.push('/employees');
             });
+        
     }
 
     cancel() {
@@ -50,7 +64,7 @@ class CreateEmployeeComponent extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 mt-4 offset-md-3 offset-md-3">
-                            <h3 className="text-center mt-3 ">Add Employee</h3>
+                            <h3 className="text-center mt-3">Update Employee</h3>
                             <div className="card-body">
                                 <form>
                                     <div className="form-group">
@@ -69,7 +83,7 @@ class CreateEmployeeComponent extends Component {
                                             value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                     </div>
                                     
-                                    <button className="btn btn-success" onClick={this.saveEmployee}>Save</button>
+                                    <button className="btn btn-success" onClick={this.updateEmployee}>Update</button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)}
                                         style={{marginLeft: "10px"}}>Cancel</button>
                                 </form>
@@ -82,4 +96,4 @@ class CreateEmployeeComponent extends Component {
     }
 }
 
-export default CreateEmployeeComponent;
+export default UpdateEmployeeComponent;
