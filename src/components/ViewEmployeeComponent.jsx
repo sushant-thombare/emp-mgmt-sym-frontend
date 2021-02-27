@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import EmployeeService from "../services/EmployeeService";
+import { AiFillEdit } from 'react-icons/ai';
+import { IoMdArrowRoundBack } from 'react-icons/io';
+
 
 class ViewEmployeeComponent extends Component {
   constructor(props) {
@@ -80,13 +83,15 @@ class ViewEmployeeComponent extends Component {
                       className="btn btn-warning"                      
                       onClick={ () => this.editDetails(this.state.id) }
                     >
+                      <AiFillEdit className="mr-2" />
                       Edit Details
                     </button>
                     <button
                       className="btn btn-danger ml-3"
                       onClick={this.cancel.bind(this)}
                     >
-                      Back to Employee List
+                      <IoMdArrowRoundBack className="mr-2" />
+                      Back
                     </button>
                   </div>
                 </form>

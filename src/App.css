@@ -1,5 +1,10 @@
-.App {
-  text-align: center;
+
+@import url('https://fonts.googleapis.com/css2?family=Stick&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap');
+
+#root {  
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .App-logo {
@@ -35,6 +40,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+.logo {
+  font-family: 'Stick', sans-serif;
 }
 
 .footer {

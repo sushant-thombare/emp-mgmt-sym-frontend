@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 import EmployeeService from "../services/EmployeeService";
+import { BsFillEyeFill } from 'react-icons/bs'
+import { FaUserEdit } from 'react-icons/fa'
+import { AiFillDelete } from 'react-icons/ai'
 
 class ListEmployeeComponent extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +20,7 @@ class ListEmployeeComponent extends Component {
   componentDidMount() {
     EmployeeService.getEmployees().then((res) => {
       this.setState({ employees: res.data });
+      toast.info('All employees loaded successfully!')
     });
   }
 
@@ -33,8 +39,9 @@ class ListEmployeeComponent extends Component {
       this.setState({
         employees: this.state.employees.filter(
           (employee) => employee.id !== id
-        ),
+        )
       });
+      toast.success('Successfully deleted!');
     });
   }
 
@@ -69,18 +76,22 @@ class ListEmployeeComponent extends Component {
                       className="btn btn-warning"
                       onClick={() => this.viewEmployee(employee.id)}
                     >
+                      <BsFillEyeFill className="mr-2"/>
                       View
                     </button>
                     <button
                       className="btn btn-info  ml-3"
                       onClick={() => this.editEmployee(employee.id)}
-                    >
+                    >       
+                        
+                      <FaUserEdit className="mr-2"/>           
                       Update
                     </button>
                     <button
                       className="btn btn-danger ml-3"
                       onClick={() => this.deleteEmployee(employee.id)}
                     >
+                      <AiFillDelete className="mr-2"/>
                       Delete
                     </button>
                   </td>

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 import EmployeeService from "../services/EmployeeService";
+import { IoIosSave } from 'react-icons/io'
+import { MdCancel } from 'react-icons/md'
 
 class CreateEmployeeComponent extends Component {
   constructor(props) {
@@ -48,6 +51,10 @@ class CreateEmployeeComponent extends Component {
 
   saveOrUpdateEmployee = (e) => {
     e.preventDefault();
+    if(!this.state.firstName || !this.state.lastName || !this.state.emailId){
+      toast.error("All fields are mandatory!");
+      return;
+    }
     let employee = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -59,10 +66,12 @@ class CreateEmployeeComponent extends Component {
     if (this.state.id === "_add") {
       EmployeeService.createEmployee(employee).then((res) => {
         this.props.history.push("/employees");
+        toast.success("Employee details added successfully!");
       });
     } else {
       EmployeeService.updateEmployee(employee, this.state.id).then((res) => {
         this.props.history.push("/employees");
+        toast.success("Employee details updated successfully!");
       });
     }
   };
@@ -120,13 +129,15 @@ class CreateEmployeeComponent extends Component {
                       className="btn btn-success"
                       onClick={this.saveOrUpdateEmployee}
                     >
+                      <IoIosSave className="mr-2"/>
                       Save
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={this.cancel.bind(this)}
                       style={{ marginLeft: "10px" }}
-                    >
+                    >                      
+                      <MdCancel className="mr-2"/>
                       Cancel
                     </button>
                   </div>
