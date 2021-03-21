@@ -16,7 +16,7 @@ class ViewEmployeeComponent extends Component {
   }
 
   componentDidMount() {
-    EmployeeService.getEmployeeById(this.state.id).then((res) => {
+    EmployeeService.getEmployeeById(this.state.id).then((res) => {      
       this.setState({ employee: res.data });
     });
   }

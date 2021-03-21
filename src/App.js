@@ -3,13 +3,14 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { IoPersonAddSharp } from 'react-icons/io'
+import { IoPersonAddSharp } from "react-icons/io";
 
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import ListEmployeeComponent from "./components/ListEmployeeComponent";
 import CreateEmployeeComponent from "./components/CreateEmployeeComponent";
 import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
+import LoginComponent from "./components/LoginComponent";
 
 toast.configure();
 
@@ -18,7 +19,7 @@ function App() {
     <div>
       <Router>
         <HeaderComponent />
-        <div className="container">        
+        <div className="container">
           <Switch>
             <Route path="/" exact component={ListEmployeeComponent}></Route>
             <Route path="/employees" component={ListEmployeeComponent}></Route>
@@ -31,7 +32,7 @@ function App() {
               path="/add-employee/:id"
               component={CreateEmployeeComponent}
             ></Route>
-            {/* <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route> */}
+            <Route path="/login" component={LoginComponent}></Route>
           </Switch>
         </div>
         <FooterComponent />

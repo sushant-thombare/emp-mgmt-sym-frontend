@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import EmployeeService from "../services/EmployeeService";
-import { BsFillEyeFill } from 'react-icons/bs'
-import { FaUserEdit } from 'react-icons/fa'
-import { AiFillDelete } from 'react-icons/ai'
+import { BsFillEyeFill } from "react-icons/bs";
+import { FaUserEdit } from "react-icons/fa";
+import { AiFillDelete } from "react-icons/ai";
 
 class ListEmployeeComponent extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -18,10 +17,13 @@ class ListEmployeeComponent extends Component {
   }
 
   componentDidMount() {
-    EmployeeService.getEmployees().then((res) => {
-      this.setState({ employees: res.data });
-      toast.info('All employees loaded successfully!')
-    });
+    EmployeeService.getEmployees()
+      .then((res) => {
+        this.setState({ employees: res.data });
+      })
+      .catch((err) => {
+        toast.error("Server is down! Unable to fetch employees list!");
+      });
   }
 
   addEmployee() {
@@ -35,14 +37,18 @@ class ListEmployeeComponent extends Component {
   }
 
   deleteEmployee(id) {
-    EmployeeService.deleteEmployee(id).then((res) => {
-      this.setState({
-        employees: this.state.employees.filter(
-          (employee) => employee.id !== id
-        )
+    EmployeeService.deleteEmployee(id)
+      .then((res) => {
+        this.setState({
+          employees: this.state.employees.filter(
+            (employee) => employee.id !== id
+          ),
+        });
+        toast.success("Successfully deleted!");
+      })
+      .catch((err) => {
+        toast.error("Something went wrong! Can't delete employee!");
       });
-      toast.success('Successfully deleted!');
-    });
   }
 
   viewEmployee(id) {
@@ -53,6 +59,7 @@ class ListEmployeeComponent extends Component {
     return (
       <div className="mt-4">
         <h2 className="text-center">Employees List</h2>
+
         <div className="row">
           <table className="table table-striped table-bordered table-hover mt-4">
             <thead>
@@ -76,22 +83,21 @@ class ListEmployeeComponent extends Component {
                       className="btn btn-warning"
                       onClick={() => this.viewEmployee(employee.id)}
                     >
-                      <BsFillEyeFill className="mr-2"/>
+                      <BsFillEyeFill className="mr-2" />
                       View
                     </button>
                     <button
                       className="btn btn-info  ml-3"
                       onClick={() => this.editEmployee(employee.id)}
-                    >       
-                        
-                      <FaUserEdit className="mr-2"/>           
+                    >
+                      <FaUserEdit className="mr-2" />
                       Update
                     </button>
                     <button
                       className="btn btn-danger ml-3"
                       onClick={() => this.deleteEmployee(employee.id)}
                     >
-                      <AiFillDelete className="mr-2"/>
+                      <AiFillDelete className="mr-2" />
                       Delete
                     </button>
                   </td>

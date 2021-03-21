@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { IoPersonAddSharp } from 'react-icons/io5'
-import { FaListAlt } from 'react-icons/fa'
+import { IoPersonAddSharp } from "react-icons/io5";
+import { FaListAlt } from "react-icons/fa";
+import { RiLoginBoxFill } from "react-icons/ri";
 
 class HeaderComponent extends Component {
   constructor(props) {
@@ -18,11 +19,11 @@ class HeaderComponent extends Component {
                 Employee Management System
               </a>
               <a href="/add-employee/_add" className="btn btn-light ml-4">
-              <IoPersonAddSharp className="mr-2" />
+                <IoPersonAddSharp className="mr-2" />
                 Add New Employee
               </a>
               <a href="/employees" className="btn btn-light ml-4">
-              <FaListAlt className="mr-2" />
+                <FaListAlt className="mr-2" />
                 Employees List
               </a>
             </div>
